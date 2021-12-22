@@ -68,7 +68,7 @@ for jgzz in KeyName2:  # 遍历基础资质
     JieGuoZZ[jgzz] = y  # 把数据保存入字典
 cz = FangFa.ChengZhangJS(PeiZi1ZZ["成长"], PeiZi2ZZ["成长"])
 JieGuoZZ["成长"] = cz  # 把数据保存入字典
-
+print(JieGuoZZ)
 '''
 # 检查胚子身上是否有必带技能，如果有则删除
 for BiDaiJN in HeChengCBD:  # 把新合成宠的必带技能遍历出来
