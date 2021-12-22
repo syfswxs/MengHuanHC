@@ -6,9 +6,13 @@
 
 import random, xlwt, xlrd
 
-ShuJuB = xlrd.open_workbook(r'F:\demo\shixun\MengHuanHeChong\TuJian.xls')  # 获取数据表格
+ShuJuB = xlrd.open_workbook(r'E:\Demo\MengHuanHC\TuJian.xls')  # 获取数据表格
 tujian = ShuJuB.sheet_by_index(0)  # 获取第一个sheet
 
+#获取成长
+def ChengZhang(a):
+    y = tujian.cell(a, 10).value
+    return y
 
 # 获取资质
 def ZiZhi(a):
@@ -42,7 +46,7 @@ def BiDaiJN(a):
 
 
 # 金柳露资质计算
-def ZiZiJS(a, b):  # a为最高资质，b为百分比
+def JingLiuLZZ(a, b):  # a为最高资质，b为百分比
     c = a * b
     c = int(c)
     y = random.randint(c, a)
@@ -50,7 +54,7 @@ def ZiZiJS(a, b):  # a为最高资质，b为百分比
 
 
 # 金柳露成长随机
-def ChengZhang(a):
+def JingLiuLCZ(a):
     i = 1
     x = []
     x.append(a)
@@ -60,7 +64,8 @@ def ChengZhang(a):
         i += 1
         x.append(n)
     y = random.choice(x)
-    return y
+    czjg = '%.3f' % (y / 1000)
+    return czjg
 
 
 # 合宠资质计算
