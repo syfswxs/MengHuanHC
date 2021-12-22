@@ -40,13 +40,13 @@ if HeChengXB == 1:  # 如果合成宠下标为1
     DiuShiCXB = 0  # 丢失宠下标则为0
 else:
     DiuShiCXB = 1  # 否则丢失宠下标为1
-HeChengC = ChongWuPZ[HeChengXB]  # 合成宠下标
-DiuShiC = ChongWuPZ[DiuShiCXB]  # 丢失宠下标
-HeChengCBD = FangFa.BiDaiJN(HeChengC)  # 获取合成造型宠必带技能
-HeChengCZX = FangFa.Name(HeChengC)  # 获取合成宠造型名称
-DiuShiCBD = FangFa.BiDaiJN(DiuShiC)  # 丢失宠造型必带技能
-ZhaoXingCJBJN = FangFa.JiNeng(HeChengC)  # 获取该造型胚子的基本技能
-DiuShiCJBJN = FangFa.JiNeng(DiuShiC)  # 获取丢失胚子基本技能
+HeChengCXH = ChongWuPZ[HeChengXB]  # 合成宠下标
+DiuShiCXH = ChongWuPZ[DiuShiCXB]  # 丢失宠下标
+HeChengCBD = FangFa.BiDaiJN(HeChengCXH)  # 获取合成造型宠必带技能
+HeChengCZX = FangFa.Name(HeChengCXH)  # 获取合成宠造型名称
+DiuShiCBD = FangFa.BiDaiJN(DiuShiCXH)  # 丢失宠造型必带技能
+ZhaoXingCJBJN = FangFa.JiNeng(HeChengCXH)  # 获取该造型胚子的基本技能
+DiuShiCJBJN = FangFa.JiNeng(DiuShiCXH)  # 获取丢失胚子基本技能
 KeNengCXJN = HeChengCBD + DiuShiCBD + ZhaoXingCJBJN + DiuShiCJBJN  # 获取可能出现的技能
 QuChongYLJN = list(set(KeNengCXJN))  # 去重复技能
 
@@ -62,14 +62,14 @@ JieGuoZZ = {'攻资': 0, '防资': 0, '体资': 0, '法资': 0, '速资': 0, '�
 # 计算生成资质
 PeiZi1ZZ = FangFa.ZiZhi(ChongWuPZ[0])  # 获取胚子1的资质
 PeiZi2ZZ = FangFa.ZiZhi(ChongWuPZ[1])  # 获取胚子2的资质
+HeChengCZZ = FangFa.ZiZhi(ChongWuPZ[HeChengXB])
 for jgzz in KeyName2:  # 遍历基础资质
     q = FangFa.HeChongZZJS(PeiZi1ZZ[jgzz], PeiZi2ZZ[jgzz])
-    y = FangFa.ZuiGaoZZ(FangFa.ZiZhi(ChongWuPZ[HeChengC])[jgzz], q)  # 计算最高资质
+    y = FangFa.ZuiGaoZZ(HeChengCZZ[jgzz], q)  # 计算最高资质
     JieGuoZZ[jgzz] = y  # 把数据保存入字典
 cz = FangFa.ChengZhangJS(PeiZi1ZZ["成长"], PeiZi2ZZ["成长"])
 JieGuoZZ["成长"] = cz  # 把数据保存入字典
-print(JieGuoZZ)
-'''
+
 # 检查胚子身上是否有必带技能，如果有则删除
 for BiDaiJN in HeChengCBD:  # 把新合成宠的必带技能遍历出来
     if BiDaiJN in ZhaoXingCJBJN:  # 如果此技能存在胚子基础技能里
@@ -91,12 +91,11 @@ for JiNeng in QuChongJN:  # 把去重技能都遍历
 
 print("恭喜你合出了个%d技能[" % len(ZuiZhongJN) + HeChengCZX + "]技能为")
 i = 1
-for zzzj in KeyName:
+for zzzj in KeyName2:
     print(zzzj + ":%d" % JieGuoZZ[zzzj], end="\t")
     i += 1
     if i > 2:
         print()
         i = 1
-print("成长:" + str(JieGuoCZ["成长"])[0:5])
+print("成长:" + JieGuoZZ["成长"])
 print(ZuiZhongJN)
-'''
