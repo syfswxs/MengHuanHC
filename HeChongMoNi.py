@@ -16,20 +16,25 @@ FangFa.JiBenCWLB()  # 调取方法显示现有宠物数据
 # 用户选择胚子
 print("-----------请输入两次胚子序号-----------")
 x = 1  # 代表用户第几次选择胚子
-KeyName = ["攻资", '防资', '体资', '法资', '速资', '成长']
+
 KeyName2 = ["攻资", '防资', '体资', '法资', '速资']
 while x <= 2:
     PeiZiXH = int(input("%d号胚子序号：" % x))
     ChongWuPZ.append(PeiZiXH)  # 把用户选择的胚子信息加入胚子列表
     print("胚子%d[" % x + FangFa.Name(PeiZiXH) + "]的资质为：")
     Num = 1
-    for zz in KeyName:  # 遍历基础资质
+    for zz in KeyName2:  # 遍历基础资质
         DangQianZZ = FangFa.ZiZhi(PeiZiXH)  # 获取当前造型对应资质的最高资质数据
-        print(zz + ":%d" % DangQianZZ[zz], end="\t")  # 输出资质和数据
+        jllzz = FangFa.JingLiuLZZ(DangQianZZ[zz], 0.9)  # 获取金柳露洗点后的资质
+        print(zz + ":%d" % jllzz, end="\t")  # 输出资质和数据
         Num += 1
         if Num > 2:  # 如果输出了两个数据 换行
             print()
             Num = 1
+    print("成长:", end="")
+    pzcz = FangFa.ChengZhang(PeiZiXH)
+    jllcz = FangFa.JingLiuLCZ(pzcz)
+    print(jllcz)
     print("【技能】：", end="")
     print(FangFa.JiNeng(PeiZiXH))
     x += 1
