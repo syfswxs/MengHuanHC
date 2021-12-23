@@ -26,15 +26,15 @@ while x <= 2:
     for zz in KeyName2:  # 遍历基础资质
         DangQianZZ = FangFa.ZiZhi(PeiZiXH)  # 获取当前造型对应资质的最高资质数据
         jllzz = FangFa.JingLiuLZZ(DangQianZZ[zz], 0.9)  # 获取金柳露洗点后的资质
-        print(zz + ":%d" % jllzz, end="\t")  # 输出资质和数据
+        print("|"+zz + ":%d" % jllzz, end="\t|")  # 输出资质和数据
         Num += 1
         if Num > 2:  # 如果输出了两个数据 换行
             print()
             Num = 1
-    print("成长:", end="")
+    print("|成长:", end="")
     pzcz = FangFa.ChengZhang(PeiZiXH)
     jllcz = FangFa.JingLiuLCZ(pzcz)
-    print(jllcz)
+    print(jllcz+" |")
     print("【技能】：", end="")
     print(FangFa.JiNeng(PeiZiXH))
     x += 1
@@ -97,10 +97,10 @@ for JiNeng in QuChongJN:  # 把去重技能都遍历
 print("恭喜你合出了个%d技能[" % len(ZuiZhongJN) + HeChengCZX + "]技能为")
 i = 1
 for zzzj in KeyName2:
-    print(zzzj + ":%d" % JieGuoZZ[zzzj], end="\t")
+    print("|"+zzzj + ":%d" % JieGuoZZ[zzzj], end="\t|")
     i += 1
     if i > 2:
         print()
         i = 1
-print("成长:" + JieGuoZZ["成长"])
+print("|成长:" + JieGuoZZ["成长"]+" |")
 print(ZuiZhongJN)

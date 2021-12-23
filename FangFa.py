@@ -6,7 +6,7 @@
 
 import random, xlwt, xlrd
 
-ShuJuB = xlrd.open_workbook(r'E:\Demo\MengHuanHC\TuJian.xls')  # 获取数据表格
+ShuJuB = xlrd.open_workbook(r'F:\demo\shixun\MengHuanHeChong\ShuJu.xls')  # 获取数据表格
 tujian = ShuJuB.sheet_by_index(0)  # 获取第一个sheet
 
 #获取成长
