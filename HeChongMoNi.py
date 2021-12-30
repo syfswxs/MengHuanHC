@@ -8,6 +8,8 @@ import random
 import FangFa  # 导入方法函数
 
 ChongWuPZ = []  # 宠物胚子列表
+PeiZiZZ1 = {}
+PeiZiZZ1 = {}
 # 列出可选择的胚子名字
 i = 1  # i为胚子对应的编号，供用户选择
 print("现有的胚子为：")
@@ -26,7 +28,7 @@ while x <= 2:
     for zz in KeyName2:  # 遍历基础资质
         DangQianZZ = FangFa.ZiZhi(PeiZiXH)  # 获取当前造型对应资质的最高资质数据
         jllzz = FangFa.JingLiuLZZ(DangQianZZ[zz], 0.9)  # 获取金柳露洗点后的资质
-        print("|"+zz + ":%d" % jllzz, end="\t|")  # 输出资质和数据
+        print("|" + zz + ":%d" % jllzz, end="\t|")  # 输出资质和数据
         Num += 1
         if Num > 2:  # 如果输出了两个数据 换行
             print()
@@ -34,7 +36,7 @@ while x <= 2:
     print("|成长:", end="")
     pzcz = FangFa.ChengZhang(PeiZiXH)
     jllcz = FangFa.JingLiuLCZ(pzcz)
-    print(jllcz+" |")
+    print(jllcz + " |")
     print("【技能】：", end="")
     print(FangFa.JiNeng(PeiZiXH))
     x += 1
@@ -60,10 +62,11 @@ PeiZiMZ1 = FangFa.Name(ChongWuPZ[0])
 PeiZiMZ2 = FangFa.Name(ChongWuPZ[1])
 
 # 合成宠技能、造型、技能预览
-print("--------------可能合成造型为[%s]或[%s]，合成技能预览：--------------" % (PeiZiMZ1, PeiZiMZ2))
+print('--'*50)
+print("<可能合成造型为[%s]或[%s]，合成技能预览>" % (PeiZiMZ1, PeiZiMZ2))
 print(QuChongYLJN)
 input("---按任意键继续合成---")
-JieGuoZZ = {'攻资': 0, '防资': 0, '体资': 0, '法资': 0, '速资': 0, '成长': 0}
+JieGuoZZ = {'攻资': 0, '防资': 0, '体资': 0, '法资': 0, '速资': 0}
 # 计算生成资质
 PeiZi1ZZ = FangFa.ZiZhi(ChongWuPZ[0])  # 获取胚子1的资质
 PeiZi2ZZ = FangFa.ZiZhi(ChongWuPZ[1])  # 获取胚子2的资质
@@ -72,7 +75,7 @@ for jgzz in KeyName2:  # 遍历基础资质
     q = FangFa.HeChongZZJS(PeiZi1ZZ[jgzz], PeiZi2ZZ[jgzz])
     y = FangFa.ZuiGaoZZ(HeChengCZZ[jgzz], q)  # 计算最高资质
     JieGuoZZ[jgzz] = y  # 把数据保存入字典
-cz = FangFa.ChengZhangJS(PeiZi1ZZ["成长"], PeiZi2ZZ["成长"])
+cz = FangFa.ChengZhangJS(PeiZi1ZZ['成长'], PeiZi2ZZ['成长'])
 JieGuoZZ["成长"] = cz  # 把数据保存入字典
 
 # 检查胚子身上是否有必带技能，如果有则删除
@@ -97,10 +100,10 @@ for JiNeng in QuChongJN:  # 把去重技能都遍历
 print("恭喜你合出了个%d技能[" % len(ZuiZhongJN) + HeChengCZX + "]技能为")
 i = 1
 for zzzj in KeyName2:
-    print("|"+zzzj + ":%d" % JieGuoZZ[zzzj], end="\t|")
+    print("|" + zzzj + ":%d" % JieGuoZZ[zzzj], end="\t|")
     i += 1
     if i > 2:
         print()
         i = 1
-print("|成长:" + JieGuoZZ["成长"]+" |")
+print("|成长:" + JieGuoZZ["成长"] + " |")
 print(ZuiZhongJN)
