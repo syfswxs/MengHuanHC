@@ -4,43 +4,47 @@
 # @File:FangFa.py
 # @Software:PyCharm
 
-import random, xlwt, xlrd
+import random
 
-ShuJuB = xlrd.open_workbook(r'F:\demo\shixun\MengHuanHeChong\ShuJu.xls')  # 获取数据表格
-tujian = ShuJuB.sheet_by_index(0)  # 获取第一个sheet
+import pandas as pd
 
-#获取成长
+tujian = pd.read_excel('F:\demo\shixun\MengHuanHeChong\ShuJu.xlsx', sheet_name="TuJian")
+
+
+# ShuJuB = xlrd.open_workbook(r'F:\demo\shixun\MengHuanHeChong\ShuJu.xls')  # 获取数据表格
+# tujian = ShuJuB.sheet_by_index(0)  # 获取第一个sheet
+
+# 获取成长
 def ChengZhang(a):
-    y = tujian.cell(a, 10).value
+    y = tujian.loc[a-1, '成长']
     return y
+
 
 # 获取资质
 def ZiZhi(a):
     zz = {}
-    ms = 5
-    while ms <= 10:
-        x = tujian.cell(0, ms).value  # 获取键
-        zz[x] = int(tujian.cell(a, ms).value)  # 获取数据
-        ms += 1
+    zizhi=['攻资', '防资', '体资', '法资', '速资','成长']
+    for z in zizhi:
+        zz[z]=tujian.loc[a-1, z]
     return zz
 
 
 # 获取名字
 def Name(a):
-    x = tujian.cell(a, 2).value
+    x = tujian.loc[a-1, '名称']
     return x
 
 
 # 获取技能
 def JiNeng(a):
-    x = tujian.cell(a, 3).value
+    x = tujian.loc[a-1, '技能']
     y = x.split('/')  # 以/分割字符串至y列表
     return y
 
 
 # 获取必带技能
 def BiDaiJN(a):
-    x = tujian.cell(a, 4).value
+    x = tujian.loc[a-1, '必带技能']
     y = x.split('/')  # 以/分割字符串至y列表
     return y
 
@@ -94,12 +98,12 @@ def ChengZhangJS(a, b):
         if mix < c:
             cz.append(mix)
     y = random.choice(cz)
-    czjg='%.3f'%(y/1000)
+    czjg = '%.3f' % (y / 1000)
     return czjg
 
 
 # 最高资质计算,合成宠物不得超过最高资质
-def ZuiGaoZZ(a, b):#b为计算出来的资质，a为造型宠物的最高资质
+def ZuiGaoZZ(a, b):  # b为计算出来的资质，a为造型宠物的最高资质
     max = int(a * 1.05)
     if b > max:
         y = max
@@ -110,19 +114,18 @@ def ZuiGaoZZ(a, b):#b为计算出来的资质，a为造型宠物的最高资质
 
 # 获取基本宠物列表
 def JiBenCWLB():
-    hangshu = tujian.nrows
-    i = 1
-    x = 1
+    hangshu = len(tujian)
+    i = 0
+    x = 0
     XuHao = []
     Name = []
     while i < hangshu:
-        XuHao.append(int(tujian.cell(i, 0).value))  # 获取序号
+        XuHao.append(tujian.loc[i, '序号'])  # 获取序号
         i += 1
     while x < hangshu:
-        Name.append(tujian.cell(x, 2).value)  # 获取名字
+        Name.append(tujian.loc[x, '名称'])  # 获取名字
         x += 1
-
     j = 0
-    while j < hangshu - 1:  # （hangshu-1）代表减掉表头占去的一行
+    while j < hangshu:  # 代表减掉表头占去的一行
         print("%d %s" % (XuHao[j], Name[j]))
         j += 1
